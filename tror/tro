@@ -12,7 +12,7 @@ screen = component.screen
 gpu = component.gpu
 shell = require("shell")
 UsersWorkingDir = nil
-
+cls
 if gpu.maxResolution() ~= 160 then
   io.stderr:write("Tier 3 GPU and Screen Required")
   os.exit(1)
@@ -43,7 +43,7 @@ function displayLogo()
   end
 displayLogo()
 print("Version 0.1.0\n")
-print("Press F to continue, E to exit.")
+print("Press F to continue, E to exit.(run the program later with 'tro'.)")
 io.write("F/E: ")
 local userInput = io.read("*l")
 if (userInput:lower()):sub(1,1) == "f" then
