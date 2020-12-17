@@ -9,9 +9,9 @@ local side = require("sides")
 reactor =component.nc_fusion_reactor
 local turo = true
 function API.fillTable()
-  API.setTable("On", turnon, 10,20,3,5)  
-  API.setTable("Off", turnoff, 22,32,3,5)
-  API.setTable("Reboot", reb, 32,32,50,50)
+  API.setTable("On", test2, 10,20,3,5)  
+  API.setTable("Off", test1, 22,32,3,5)
+  API.setTable("Reboot", test3, 32,32,50,50)
   API.screen()
 end
 function getClick()
@@ -25,16 +25,16 @@ function getClick()
   end
 end
 
- function turnon()
+ function test1()
   reactor.deactivate()
   turo = false
 end
 
-function turnoff()
+function test2()
      reactor.activate()
   turo = true
 end
-function reb()
+function test3()
 computer.shutdown(true)
 end
 term.setCursorBlink(false)
