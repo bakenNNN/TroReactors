@@ -1,0 +1,55 @@
+Version = "0.1.0"
+component = require("component")
+computer = require("computer")
+event = require("event")
+os = require("os")
+term = require("term")
+thread = require("thread")
+serialization = require("serialization")
+unicode = require("unicode")
+filesystem = require("filesystem")
+screen = component.screen
+gpu = component.gpu
+shell = require("shell")
+UsersWorkingDir = nil
+
+if gpu.maxResolution() ~= 160 then
+  io.stderr:write("Tier 3 GPU and Screen Required")
+  os.exit(1)
+end
+
+
+function cleearlogo()
+gpu.fill(1, 2, 130, 42,  " ")
+end
+function reactorgraph()
+local filee = io.open("/tror/mainscreengraphics.lua", "r")
+    local e = 1
+    for line in filee:lines() do 
+      gpu.set(15, 5+e, line)
+      e = e+1
+    end
+    filee:close()
+  end
+
+function displayLogo()
+    local file = io.open("/tror/startupscreen.ff", "r")
+    local i = 1
+    for line in file:lines() do 
+      gpu.set(15, 5+i, line)
+      i = i+1
+    end
+    file:close()
+  end
+displayLogo()
+print("Version 0.1.0\n")
+print("Press F to continue, E to exit.")
+io.write("F/E: ")
+local userInput = io.read("*l")
+if (userInput:lower()):sub(1,1) == "f" then
+cleearlogo()
+reactorgraph()
+dofile("/tror/mainscreen")
+
+else cleearlogo()
+end

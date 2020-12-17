@@ -1,0 +1,63 @@
+API = require("buttonAPI")
+local event = require("event")
+local computer = require("computer")
+local term = require("term")
+local component = require("component")
+local gpu = component.gpu
+local colors = require("colors")
+local side = require("sides")
+reactor =component.nc_fusion_reactor
+local turo = true
+function API.fillTable()
+  API.setTable("On", turnon, 10,20,3,5)  
+  API.setTable("Off", turnoff, 22,32,3,5)
+  API.setTable("Reboot", reb, 32,32,50,50)
+  API.screen()
+end
+function getClick()
+  local _, _, x, y = event.pull(1,touch)
+  if x == nil or y == nil then
+    local h, w = gpu.getResolution()
+    gpu.set(h, w, ".")
+    gpu.set(h, w, " ")
+  else 
+    API.checkxy(x,y)
+  end
+end
+
+ function turnon()
+  reactor.deactivate()
+  turo = false
+end
+
+function turnoff()
+     reactor.activate()
+  turo = true
+end
+function reb()
+computer.shutdown(true)
+end
+term.setCursorBlink(false)
+API.fillTable()
+while true do
+getClick()
+
+gpu.set(30,41, tostring(reactor.getEfficiency()))
+gpu.set(10,41, "Efficiency: ")
+gpu.set(110,41, tostring(reactor.getProblem()))
+gpu.set(85,41, "Current problems: ")
+gpu.set(30,35, tostring(reactor.getToroidSize()))
+gpu.set(10,35, "Toroid Size: ")
+gpu.set(35,20, reactor.getFirstFusionFuel())
+gpu.set(10,20, "First Fusion Fuel: ")
+gpu.set(35,21, reactor.getSecondFusionFuel())
+gpu.set(10,21, "Second Fusion Fuel: ")
+gpu.set(135,20,tostring(reactor.getReactorProcessPower()))
+gpu.set(105,20, "Current Power Output(RF/T: )")
+gpu.set(135,21, tostring(reactor.getReactorCoolingRate()))
+gpu.set(105,21,"Reactor Cooling Rate(K/T): ")
+gpu.set(105,22, "Reactor Cooling Rate(%): ")
+gpu.set(135,22,tostring(reactor.getReactorCoolingRate()*100/5000) )
+if turo == false then gpu.set(70,20, "Reactor is off")gpu.set(71,15, " ")gpu.set(72,15, " ")gpu.set(73,15, " ")gpu.set(75,15, " ")gpu.set(76,15, " ")gpu.set(77,15, " ")gpu.set(78,15, " ")gpu.set(79,15, " ")gpu.set(80,15, " ")gpu.set(81,15, " ")gpu.set(82,15, " ")gpu.set(83,15, " ")gpu.set(84,15, " ")gpu.set(85,15, " ")
+else gpu.set(70,15, "Reactor is On") gpu.set(70,20, " ") gpu.set(71,20, " ")gpu.set(72,20, " ")gpu.set(74,20, " ")gpu.set(75 ,20, " ")gpu.set(76,20, " ")gpu.set(77,20, " ")gpu.set(78,20, " ")gpu.set(79,20, " ")gpu.set(80,20, " ")gpu.set(81,20, " ")gpu.set(82,20, " ")gpu.set(83,20, " ")gpu.set(84,20, " ")gpu.set(85,20, " ") end
+end
