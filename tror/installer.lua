@@ -58,7 +58,6 @@ function downloadFile(fileName)
   if not isGood then
     io.stderr:write("Unable to Download\n")
     io.stderr:write(err)
-    forceExit(false)
   end
 end
 onlineCheck()
