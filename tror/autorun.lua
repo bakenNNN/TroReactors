@@ -1,1 +1,1 @@
-dofile("/tror/tro")
+dofile("/home/tro")
