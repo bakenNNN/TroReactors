@@ -12,7 +12,7 @@ screen = component.screen
 gpu = component.gpu
 shell = require("shell")
 UsersWorkingDir = nil
-cls
+os.execute(""cls")
 if gpu.maxResolution() ~= 160 then
   io.stderr:write("Tier 3 GPU and Screen Required")
   os.exit(1)
