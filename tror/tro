@@ -23,7 +23,7 @@ function cleearlogo()
 gpu.fill(1, 2, 130, 42,  " ")
 end
 function reactorgraph()
-local filee = io.open("/tror/mainscreengraphics.lua", "r")
+local filee = io.open("/home/mainscreengraphics.lua", "r")
     local e = 1
     for line in filee:lines() do 
       gpu.set(15, 5+e, line)
@@ -33,7 +33,7 @@ local filee = io.open("/tror/mainscreengraphics.lua", "r")
   end
 
 function displayLogo()
-    local file = io.open("/tror/startupscreen.ff", "r")
+    local file = io.open("/home/startupscreen.ff", "r")
     local i = 1
     for line in file:lines() do 
       gpu.set(15, 5+i, line)
@@ -49,7 +49,7 @@ local userInput = io.read("*l")
 if (userInput:lower()):sub(1,1) == "f" then
 cleearlogo()
 reactorgraph()
-dofile("/tror/mainscreen")
+dofile("/home/mainscreen")
 
 else cleearlogo()
 end
