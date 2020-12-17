@@ -16,15 +16,17 @@ function onlineCheck()
     os.exit(false)
   end
 end
-BranchURL = "raw.githubusercontent.com/bakenNNN/TroReactors"
+BranchURL = "https://raw.githubusercontent.com/bakenNNN/TroReactors"
+ReleaseVersionsFile = "/tror/ReleaseVersions.lua"
+ReleaseVersions = nil
 
 
 function createInstallDirectory()
-  if not filesystem.isDirectory("/tro") then
-    print("Creating \"/tro\" directory")
-    local success, msg = filesystem.makeDirectory("/tro")
+  if not filesystem.isDirectory("/tror") then
+    print("Creating \"/tror\" directory")
+    local success, msg = filesystem.makeDirectory("/tror")
     if success == nil then
-      io.stderr:write("Failed to create \"/tro\" directory, "..msg)
+      io.stderr:write("Failed to create \"/tror\" directory, "..msg)
       os.exit(false)
     end
   end
@@ -63,6 +65,7 @@ onlineCheck()
 createInstallDirectory()
 
 downloadNeededFiles()
+for i,v in ipairs(ReleaseVersions.launcher.note) do print("  "..v) end
 print([[
 Installation complete!
 Use the 'tro' command to run the launcher.
